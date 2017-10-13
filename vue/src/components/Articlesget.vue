@@ -1,10 +1,11 @@
 <template>
   <div class="articlesget">
-    <h1>Deze template haalt alle artikkels op</h1>
-    <h2>{{ posts }}</h2>
-
-
-  <ul v-if="errors && errors.length">
+    <h2>Deze template haalt alle artikkels op</h2>
+    <li v-for="post in posts">
+      {{ post.title }}
+      {{ post.body }}
+    </li>
+     <ul v-if="errors && errors.length">
     <li v-for="error of errors">
       {{error.message}}
     </li>
@@ -28,13 +29,11 @@ created() {
     axios.get(`http://localhost:4000/node/1?_format=hal_json`)
       .then(response => {
           console.log(response.data);
-          console.log('geluuukt');
       // JSON responses are automatically parsed.
       this.posts = response.data
       
     })
     .catch(e => {
-      console.log('error');
       this.errors.push(e);
     })
 }
