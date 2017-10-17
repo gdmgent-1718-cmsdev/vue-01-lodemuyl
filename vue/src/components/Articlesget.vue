@@ -1,13 +1,32 @@
 <template>
   <div class="articlesget">
     <h2>Deze template haalt alle artikkels op</h2>
-    <li v-for="post in posts">
-      {{ post.title }}
-      {{ post.body }}
-    </li>
+    <form v-on:submit.prevent="getartk">
+      <div class="row">
+        <div class="col s12">
+          welke node wil je ophalen ?
+          <div class="input-field inline">
+            <input id="numb" v-model.number="node"></label>
+          </div>
+        </div>
+      </div>
+    </form>
+    
+    <div class="container">
+    <div class="collection">
+        <div class="collection-item blue lighten-2">
+          <h4>{{ post.title }}</h4>
+        </div>
+        <div class="collection-item #64b5f6 blue lighten-2">
+          {{ post.body }}
+        </div>    
+      </div>
+    </div>
+      
+      
      <ul v-if="errors && errors.length">
     <li v-for="error of errors">
-      {{error.message}}
+      {{error.message[0].value}}
     </li>
   </ul>
 
@@ -21,16 +40,30 @@ export default {
   data () {
     return {
       msg: 'dit zijn alle artikkels uit de backend van d8 ',
-      posts: [],
+      post: {
+        title: '',
+        body: ''
+      },   
+      node: 19,   
       errors: []
     }
   },
+methods: {
+  getartk () {
+    this.$update;
+    console.log(this.$data.node);
+  }
+
+},
+update(){ console.log("updated") },
 created() {
-    axios.get(`http://localhost:4000/node/1?_format=hal_json`)
+  console.log('in created');
+    axios.get(`http://localhost:8080/node/`+ this.$data.node +`?_format=hal_json`)
       .then(response => {
-          console.log(response.data);
+          
       // JSON responses are automatically parsed.
-      this.posts = response.data
+      this.post.title = response.data.title[0].value;
+      this.post.body = response.data.body[0].value
       
     })
     .catch(e => {

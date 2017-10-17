@@ -35,7 +35,7 @@ export default {
            headers: {
             'Accept': 'application/hal+json',
             'Content-Type': 'application/hal+json',
-            'X-CSRF-Token': 'GctuBzlIROS_XW8Sy3RmIeq9BD7q6vKGajTdoCRwNkQ',
+            'X-CSRF-Token': 'iKnpqGkq9jNSmZu-MxkAMxu_zYTJbN6bys1eL4uiBoA',
             'Authorization': 'basic Y21zZGV2LXVzZXI6Y21zZGV2LXBhc3M='
           }
     }  
@@ -47,12 +47,12 @@ export default {
     }
   },
   methods: {
-    createpost : () => {
-      axios.post('http://localhost:4000/node', 
+    createpost: () => {
+      axios.post('http://localhost:8080/node', 
       { 
           "_links": {
             "type": {
-              "href": "http://localhost:4000/rest/type/node/article"
+              "href": "http://localhost:8080/rest/type/node/article"
             }
           },
           "title": {
